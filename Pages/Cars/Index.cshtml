@@ -1,0 +1,64 @@
+﻿@page
+@model ParkingService.Pages.Cars.IndexModel
+@{
+    ViewData["Title"] = "Cars";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-11">
+            <h1 class="text-center">Cars</h1>
+        </div>
+        <div class="col-1">
+            <a asp-page="Create"><i class="fas fa-plus"></i></a>
+        </div>
+    </div>
+    <hr />
+    <div class="row">
+        <div class="col-12">
+            <div class="row">
+                <div class="col-2">
+                    <p><strong>Model</strong></p>
+                </div>
+                <div class="col-1">
+                    <p><strong>Color</strong></p>
+                </div>
+                <div class="col-2">
+                    <p><strong>Plate number</strong></p>
+                </div>
+                <div class="col-2">
+                    <p><strong>Owner's name</strong></p>
+                </div>
+                <div class="col-3">
+                    <p><strong>Owner's phone number</strong></p>
+                </div>
+            </div>
+            <hr />
+            <div class="row">
+                @foreach (var car in Model.Cars)
+                {
+                    <div class="col-2">
+                        <p>@car.Model</p>
+                    </div>
+                    <div class="col-1">
+                        <p>@car.Color</p>
+                    </div>
+                    <div class="col-2">
+                        <p>@car.PlateNumber</p>
+                    </div>
+                    <div class="col-2">
+                        <p>@car.OwnerName</p>
+                    </div>
+                    <div class="col-3">
+                        <p>@car.PhoneNumber</p>
+                    </div>
+                    <div class="col-2">
+                        <a asp-page="/Administration/Index"><i class="fas fa-wallet"></i></a>
+                        <a asp-page="Edit"><i class="far fa-edit"></i></a>
+                        <a asp-page="Delete" onclick="return confirm('Do you want to remove information about this car?');"><i class="far fa-trash-alt"></i></a>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,43 @@
+﻿@page
+@model ParkingService.Pages.Administration.CreateModel
+
+@{
+    ViewData["Title"] = "Add a price";
+}
+
+<h1 class="text-center">Add a price</h1>
+<hr />
+<div class="container">
+    <div class="row">
+        <div class="col-10">
+            <form method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group row">
+                    <label asp-for="Price.Hour" class="control-label col-sm-4 text-sm-right">One hour price:</label>
+                    <input asp-for="Price.Hour" class="form-control col-sm-6" />
+                    <span asp-validation-for="Price.Hour" class="text-danger"></span>
+                </div>
+                <div class="form-group row">
+                    <label asp-for="Price.Day" class="control-label col-sm-4 text-sm-right">One day price:</label>
+                    <input asp-for="Price.Day" class="form-control col-sm-6 text-left" />
+                    <span asp-validation-for="Price.Day" class="text-danger"></span>
+                </div>
+                <div class="form-group row">
+                    <label asp-for="Price.DateTime" class="control-label col-sm-4 text-sm-right">Date and time:</label>
+                    <input asp-for="Price.DateTime" class="form-control col-sm-6" value="@DateTime.Now.ToString("dd/mm/yyyy HH:mm")"/>
+                    <span asp-validation-for="Price.DateTime" class="text-danger"></span>
+                </div>
+                <div class="form-group text-center">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+        <div class="col-2">
+            <a asp-page="Index">Back to List</a>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

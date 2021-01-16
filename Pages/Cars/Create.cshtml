@@ -1,0 +1,53 @@
+﻿@page
+@model ParkingService.Pages.Cars.CreateModel
+
+@{
+    ViewData["Title"] = "Add a car";
+}
+
+<h1 class="text-center">Add a car</h1>
+<hr />
+<div class="container">
+    <div class="row">
+        <div class="col-10 ">
+            <form method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group row">
+                    <label asp-for="Car.Model" class="control-label col-sm-4 text-sm-right">Model:</label>
+                    <input asp-for="Car.Model" class="form-control col-sm-6" />
+                    <span asp-validation-for="Car.Model" class="text-danger"></span>
+                </div>
+                <div class="form-group row">
+                    <label asp-for="Car.Color" class="control-label col-sm-4 text-sm-right">Color:</label>
+                    <input asp-for="Car.Color" class="form-control col-sm-6" />
+                    <span asp-validation-for="Car.Color" class="text-danger"></span>
+                </div>
+                <div class="form-group row">
+                    <label asp-for="Car.PlateNumber" class="control-label col-sm-4 text-sm-right">Plate number:</label>
+                    <input asp-for="Car.PlateNumber" class="form-control col-sm-6" />
+                    <span asp-validation-for="Car.PlateNumber" class="text-danger"></span>
+                </div>
+                <div class="form-group row">
+                    <label asp-for="Car.OwnerName" class="control-label col-sm-4 text-sm-right">Owner's name:</label>
+                    <input asp-for="Car.OwnerName" class="form-control col-sm-6" />
+                    <span asp-validation-for="Car.OwnerName" class="text-danger"></span>
+                </div>
+                <div class="form-group row">
+                    <label asp-for="Car.PhoneNumber" class="control-label col-sm-4 text-sm-right">Owner's phone number</label>
+                    <input asp-for="Car.PhoneNumber" class="form-control col-sm-6" />
+                    <span asp-validation-for="Car.PhoneNumber" class="text-danger"></span>
+                </div>
+                <div class="form-group text-center">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+        <div class="col-2">
+            <a asp-page="Index">Back to List</a>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

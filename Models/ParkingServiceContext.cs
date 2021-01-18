@@ -19,5 +19,12 @@ namespace ParkingService.Models
         {
             Database.EnsureCreated();
         }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<User>().HasIndex(u => u.Email).IsUnique();
+            modelBuilder.Entity<Car>().HasIndex(u => u.PhoneNumber).IsUnique();
+            modelBuilder.Entity<Car>().HasIndex(u => u.PlateNumber).IsUnique();
+        }
     }
 }

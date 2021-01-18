@@ -1,0 +1,55 @@
+﻿@page
+@model ParkingService.Pages.Journal.IndexModel
+@{
+    ViewData["Title"] = "Journal";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-11">
+            <h1 class="text-center">Journal</h1>
+        </div>
+        <div class="col-1">
+            <a asp-page="Create"><i class="fas fa-plus"></i></a>
+        </div>
+    </div>
+    <hr />
+    <div class="row">
+        <div class="col-12">
+            <div class="row">
+                <div class="col-3">
+                    <p><strong>Car number</strong></p>
+                </div>
+                <div class="col-3">
+                    <p><strong>Entry time</strong></p>
+                </div>
+                <div class="col-3">
+                    <p><strong>Leaving time</strong></p>
+                </div>
+            </div>
+            <hr />
+            <div class="row">
+                @foreach (var entry in Model.Entries)
+                {
+                    <div class="col-3">
+                        <p>@entry.Car.PlateNumber</p>
+                    </div>
+                    <div class="col-3">
+                        <p>@entry.EntryTime.ToString("dd.MM.yyyy HH:mm")</p>
+                    </div>
+                    <div class="col-3">
+                        @if (entry.LeavingTime != null)
+                        {
+                            DateTime date = Convert.ToDateTime(entry.LeavingTime);
+                            <p>@date.ToString("dd.MM.yyyy HH:mm")</p>
+                        }
+                    </div>
+                    <div class="col-3">
+                        <a asp-page=""><i class="fas fa-wallet"></i></a>
+                        <a asp-page="Edit" asp-route-id="@entry.Id"><i class="far fa-edit"></i></a>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

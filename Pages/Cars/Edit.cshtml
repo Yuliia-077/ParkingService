@@ -1,17 +1,18 @@
 ﻿@page
-@model ParkingService.Pages.Cars.CreateModel
+@model ParkingService.Pages.Cars.EditModel
 
 @{
-    ViewData["Title"] = "Add a car";
+    ViewData["Title"] = "Edit";
 }
 
-<h1 class="text-center">Add a car</h1>
+<h1 class="text-center">Edit a car</h1>
 <hr />
 <div class="container">
     <div class="row">
         <div class="col-10 ">
             <form method="post">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="Car.Id" />
                 <div class="form-group row">
                     <label asp-for="Car.Model" class="control-label col-sm-4 text-sm-right">Model:</label>
                     <input asp-for="Car.Model" class="form-control col-sm-6" />

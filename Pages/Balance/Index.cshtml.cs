@@ -6,30 +6,32 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using ParkingService.Models;
 
-namespace ParkingService.Pages.Administration
+namespace ParkingService.Pages.Balance
 {
     public class IndexModel : PageModel
     {
         private readonly ParkingServiceContext _context;
-        public Price Price { get; set; }
+        public List<Models.Balance> Balances { get; set; } 
+        public int Id { get; set; }
 
         public IndexModel(ParkingServiceContext db)
         {
             _context = db;
         }
 
-        public IActionResult OnGet()
+        public IActionResult OnGet(int? id)
         {
-            if(_context.Prices.Any())
+            if(id != null)
             {
-                DateTime date = _context.Prices.Where(p => p.DateTime <= DateTime.Now).Max(p => p.DateTime);
-                if (date != null)
+                Id = Convert.ToInt32(id);
+                if (_context.Balances.Any(n => n.EntryId == Id))
                 {
-                    Price = _context.Prices.FirstOrDefault(p => p.DateTime == date);
+                    Balances = _context.Balances.Where(n => n.EntryId == id).ToList();
                     return Page();
                 }
+                return RedirectToPage("./Create", new { id = Id });
             }
-            return RedirectToPage("./Create");
+            return RedirectToPage("/Payment/Index");
         }
     }
 }

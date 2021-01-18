@@ -18,9 +18,17 @@ namespace ParkingService.Pages.Cars
             _context = db;
         }
 
-        public void OnGet()
+        public IActionResult OnGet()
         {
-            Cars = _context.Cars.OrderByDescending(p=>p.Id).ToList();
+            if(_context.Cars.Any())
+            {
+                Cars = _context.Cars.OrderByDescending(p => p.Id).ToList();
+                if (Cars != null)
+                {
+                    return Page();
+                }
+            }
+            return RedirectToPage("./Create");
         }
     }
 }

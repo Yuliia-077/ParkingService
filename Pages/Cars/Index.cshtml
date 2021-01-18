@@ -53,9 +53,8 @@
                         <p>@car.PhoneNumber</p>
                     </div>
                     <div class="col-2">
-                        <a asp-page="/Administration/Index"><i class="fas fa-wallet"></i></a>
-                        <a asp-page="Edit"><i class="far fa-edit"></i></a>
-                        <a asp-page="Delete" onclick="return confirm('Do you want to remove information about this car?');"><i class="far fa-trash-alt"></i></a>
+                        <a asp-page="Edit" asp-route-id="@car.Id"><i class="far fa-edit"></i></a>
+                        <a asp-page="Delete" asp-route-id="@car.Id" onclick="return confirm('Do you want to remove information about this car?');"><i class="far fa-trash-alt"></i></a>
                     </div>
                 }
             </div>

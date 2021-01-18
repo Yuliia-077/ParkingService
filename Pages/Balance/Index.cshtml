@@ -1,0 +1,44 @@
+﻿@page
+@model ParkingService.Pages.Balance.IndexModel
+@{
+    ViewData["Title"] = "Balance";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-11">
+            <h1 class="text-center">Balance</h1>
+        </div>
+        <div class="col-1">
+            <a asp-page="Create" asp-route-id="@Model.Id"><i class="fas fa-plus"></i></a>
+        </div>
+    </div>
+    <hr />
+    <div class="row">
+        <div class="col-12">
+            <div class="row">
+                <div class="col-4">
+                    <p><strong>Payment</strong></p>
+                </div>
+                <div class="col-4">
+                    <p><strong>Date and time</strong></p>
+                </div>
+            </div>
+            <hr />
+            <div class="row">
+                @foreach (var balance in Model.Balances)
+                {
+                    <div class="col-4">
+                        <p>@balance.Payment</p>
+                    </div>
+                    <div class="col-4">
+                        <p>@balance.Time.ToString("dd.MM.yyyy HH:mm")</p>
+                    </div>
+                    <div class="col-4">
+                        <a asp-page="Edit" asp-route-id="@balance.Id"><i class="far fa-edit"></i></a>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

@@ -21,7 +21,9 @@ namespace ParkingService.Models
         public List<Balance> Balances { get; set; }
 
         [NotMapped]
-        public int Hours { get; set; }
-        
+        public decimal Payment { get; set; }
+        [NotMapped]
+        public bool IsPaid { get; set; }
+
     }
 }

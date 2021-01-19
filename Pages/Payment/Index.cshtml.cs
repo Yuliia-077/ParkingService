@@ -48,7 +48,29 @@ namespace ParkingService.Pages.Payment
                     }
                     int days = Convert.ToInt32(span.Days);
                     int hours = Convert.ToInt32(span.Hours);
-                    entry.Hours = (int)(days * price.Day  + hours * price.Hour);
+                    entry.Payment = days * price.Day  + hours * price.Hour;
+                    if(_context.Balances.Any(e=>e.EntryId==entry.Id))
+                    {
+                        var listBalance = _context.Balances.Where(e => e.EntryId == entry.Id).ToList();
+                        decimal sum = 0;
+                        foreach (var bal in listBalance)
+                        {
+                            sum += bal.Payment;
+                        }
+                        if (sum >= entry.Payment)
+                        {
+                            entry.IsPaid = true;
+                        }
+                        else
+                        {
+                            entry.IsPaid = false;
+                            entry.Payment -= sum;
+                        }
+                    }
+                    else
+                    {
+                        entry.IsPaid = false;
+                    }
                     entries.Add(entry);
                 }
                 Entries = entries;

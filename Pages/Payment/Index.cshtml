@@ -11,7 +11,7 @@
         </div>
     </div>
     <hr />
-    <div class="row">
+    <div class="row text-center">
         <div class="col-12">
             <div class="row">
                 <div class="col-4">
@@ -28,9 +28,18 @@
                     <div class="col-4">
                         <p>@entry.Car.PlateNumber</p>
                     </div>
-                    <div class="col-4">
-                        <p>@entry.Hours</p>
-                    </div>
+                    @if (entry.IsPaid == false)
+                    {
+                        <div class="col-4  payment">
+                            <p style="color:red;">@entry.Payment</p>
+                        </div>
+                    }
+                    @if (entry.IsPaid == true)
+                    {
+                        <div class="col-4 ">
+                            <p style="color:green;">@entry.Payment</p>
+                        </div>
+                    }
                     <div class="col-4">
                         <a asp-page="/Balance/Index" asp-route-id="@entry.Id"><i class="fas fa-wallet"></i></a>
                     </div>

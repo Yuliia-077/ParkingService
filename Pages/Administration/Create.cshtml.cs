@@ -35,7 +35,7 @@ namespace ParkingService.Pages.Administration
             _context.Prices.Add(Price);
             await _context.SaveChangesAsync();
 
-            return RedirectToPage("./Index");
+            return RedirectToPage("/Index");
         }
     }
 }

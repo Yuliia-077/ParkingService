@@ -1,10 +1,27 @@
 ﻿@page
-@model IndexModel
+@model ParkingService.Pages.Administration.IndexModel
 @{
-    ViewData["Title"] = "Home page";
+    ViewData["Title"] = "Price";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="container">
+    <div class="row">
+        <div class="col-11">
+            <h1 class="text-center">Payment</h1>
+        </div>
+        <div class="col-1">
+            <a asp-page="/Administration/Create"><i class="fas fa-plus"></i></a>
+        </div>
+    </div>
+    <hr />
+    <div class="row">
+        <div class="col-6 text-right">
+            <p><strong>One hour price: </strong></p>
+            <p><strong>One day price: </strong></p>
+        </div>
+        <div class="col-6">
+            <p>@Model.Price.Hour</p>
+            <p>@Model.Price.Day</p>
+        </div>
+    </div>
 </div>

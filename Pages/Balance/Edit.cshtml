@@ -1,0 +1,40 @@
+﻿@page
+@model ParkingService.Pages.Balance.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1 class="text-center">Edit money on the balance</h1>
+<hr />
+<div class="container">
+    <div class="row">
+        <div class="col-10">
+            <form method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group row">
+                    <input type="hidden" asp-for="Balance.Id" />
+                    <label asp-for="Balance.Payment" class="control-label col-sm-4 text-sm-right">Payment:</label>
+                    <input asp-for="Balance.Payment" class="form-control col-sm-6" />
+                    <span asp-validation-for="Balance.Payment" class="text-danger"></span>
+                </div>
+                <div class="form-group row">
+                    <label asp-for="Balance.Time" class="control-label col-sm-4 text-sm-right">Date and time:</label>
+                    <input asp-for="Balance.Time" class="form-control col-sm-6" />
+                    <span asp-validation-for="Balance.Time" class="text-danger"></span>
+                </div>
+                <input type="hidden" asp-for="Balance.EntryId" />
+                <div class="form-group text-center">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+        <div class="col-2 text-center">
+            <a asp-page="Index" asp-route-id="@Model.Balance.EntryId">Back to balance</a>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

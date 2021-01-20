@@ -40,16 +40,19 @@ namespace ParkingService.Pages.Cars
         {
             if (ModelState.IsValid)
             {
-                if(Car != null)
+                if (await _context.Cars.AnyAsync(x => x.PlateNumber == Car.PlateNumber && x.Id != Car.Id))
                 {
-                    if (await _context.Cars.AnyAsync(c => c.Id == Car.Id))
-                    {
-                        _context.Cars.Update(Car);
-                        await _context.SaveChangesAsync();
-                        return RedirectToPage("Index");
-                    }
-
-                } 
+                    ModelState.AddModelError("", "This plate number is used!");
+                    return Page();
+                }
+                if (await _context.Cars.AnyAsync(x => x.PhoneNumber == Car.PhoneNumber && x.Id != Car.Id))
+                {
+                    ModelState.AddModelError("", "This phone number is used!");
+                    return Page();
+                }
+                _context.Cars.Update(Car);
+                await _context.SaveChangesAsync();
+                return RedirectToPage("./Index");
             }
             return Page();
         }

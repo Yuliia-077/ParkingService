@@ -39,7 +39,7 @@ namespace ParkingService.Pages.Account
                     return RedirectToPage("/Index");
                 }
                 else
-                    ModelState.AddModelError("", "This Email are used!");
+                    ModelState.AddModelError("", "This Email is used!");
             }
             return Page();
 

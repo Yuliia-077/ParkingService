@@ -11,11 +11,11 @@ namespace ParkingService.Models
     {
         public int Id { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Enter entry time!")]
         public DateTime EntryTime { get; set; }
         public DateTime? LeavingTime { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Choose car!")]
         public int CarId { get; set; }
         public Car Car { get; set; }
         public List<Balance> Balances { get; set; }

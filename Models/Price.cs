@@ -10,13 +10,17 @@ namespace ParkingService.Models
     public class Price
     {
         public int Id { get; set; }
+
         [Column(TypeName = "decimal(19,2)")]
-        [Required]
+        [Required(ErrorMessage ="Enter one hour price!")]
+        [DataType(DataType.Currency)]
         public decimal Hour { get; set; }
+
         [Column(TypeName = "decimal(19,2)")]
-        [Required]
+        [Required(ErrorMessage = "Enter one day price!")]
         public decimal Day { get; set; }
-        [Required]
+
+        [Required(ErrorMessage = "Enter date and time!")]
         public DateTime DateTime { get; set; }
     }
 }

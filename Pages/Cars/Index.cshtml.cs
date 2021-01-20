@@ -5,9 +5,12 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using ParkingService.Models;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ParkingService.Pages.Cars
 {
+    [Authorize]
     public class IndexModel : PageModel
     {
         private readonly ParkingServiceContext _context;
@@ -19,11 +22,11 @@ namespace ParkingService.Pages.Cars
             _context = db;
         }
 
-        public IActionResult OnGet()
+        public async Task<IActionResult> OnGetAsync()
         {
             if (_context.Cars.Any())
             {
-                Cars = _context.Cars.OrderByDescending(p => p.Id).ToList();
+                Cars = await _context.Cars.OrderByDescending(p => p.Id).ToListAsync();
                 if (Cars != null)
                 {
                     return Page();

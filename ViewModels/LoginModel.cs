@@ -4,17 +4,15 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 
-namespace ParkingService.Models
+namespace ParkingService.ViewModels
 {
-    public class User
+    public class LoginModel
     {
-        public int Id { get; set; }
-        [Required]
-        public string Name { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Enter Email")]
         public string Email { get; set; }
-        [Required]
+
+        [Required(ErrorMessage = "Enter Password")]
+        [DataType(DataType.Password)]
         public string Password { get; set; }
-        public bool IsAdmin { get; set; }
     }
 }

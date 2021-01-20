@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ParkingService.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ParkingService.Pages.Journal
 {
+    [Authorize]
     public class EditModel : PageModel
     {
         private readonly ParkingService.Models.ParkingServiceContext _context;

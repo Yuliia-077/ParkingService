@@ -9,15 +9,25 @@ namespace ParkingService.Models
     public class Car
     {
         public int Id { get; set; }
-        [Required]
+
+        [StringLength(200, MinimumLength = 3, ErrorMessage = "The string length must be between 3 and 200 characters!")]
+        [Required(ErrorMessage ="Enter model!")]
         public string Model { get; set; }
-        [Required]
+
+        [StringLength(200, MinimumLength = 3, ErrorMessage = "The string length must be between 3 and 200 characters!")]
+        [Required(ErrorMessage = "Enter color!")]
         public string Color { get; set; }
-        [Required]
+
+
+        [Required(ErrorMessage = "Enter plate number!")]
         public string PlateNumber { get; set; }
-        [Required]
+
+        [StringLength(200, MinimumLength = 3, ErrorMessage = "The string length must be between 3 and 200 characters!")]
+        [Required(ErrorMessage = "Enter owner`s name!")]
         public string OwnerName { get; set; }
-        [Required]
+
+        [Required(ErrorMessage = "Enter phone number!")]
+        [Phone]
         public string PhoneNumber { get; set; }
 
         public List<Entry> Entries { get; set; }

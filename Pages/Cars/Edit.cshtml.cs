@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ParkingService.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ParkingService.Pages.Cars
 {
+    [Authorize]
     public class EditModel : PageModel
     {
         private readonly ParkingService.Models.ParkingServiceContext _context;
@@ -23,18 +25,15 @@ namespace ParkingService.Pages.Cars
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            if (id == null)
+            if (id != null)
             {
-                return NotFound();
+                Car = await _context.Cars.FirstOrDefaultAsync(m => m.Id == id);
+                if (Car != null)
+                {
+                    return Page();
+                }
             }
-
-            Car = await _context.Cars.FirstOrDefaultAsync(m => m.Id == id);
-
-            if (Car == null)
-            {
-                return NotFound();
-            }
-            return Page();
+            return NotFound();
         }
 
         public async Task<IActionResult> OnPostAsync()

@@ -6,9 +6,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using ParkingService.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ParkingService.Pages.Administration
 {
+    [Authorize]
     public class CreateModel : PageModel
     {
         private readonly ParkingServiceContext _context;

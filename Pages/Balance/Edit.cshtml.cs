@@ -7,41 +7,35 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ParkingService.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ParkingService.Pages.Balance
 {
+    [Authorize]
     public class EditModel : PageModel
     {
         private readonly ParkingService.Models.ParkingServiceContext _context;
+        [BindProperty]
+        public Models.Balance Balance { get; set; }
 
         public EditModel(ParkingService.Models.ParkingServiceContext context)
         {
             _context = context;
         }
 
-        [BindProperty]
-        public Models.Balance Balance { get; set; }
-
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            if (id == null)
+            if(id!=null)
             {
-                return NotFound();
+                Balance = await _context.Balances.FirstOrDefaultAsync(m => m.Id == id);
+                if(Balance!=null)
+                {
+                    return Page();
+                }
             }
-
-            Balance = await _context.Balances
-                .Include(b => b.Entry).FirstOrDefaultAsync(m => m.Id == id);
-
-            if (Balance == null)
-            {
-                return NotFound();
-            }
-           ViewData["EntryId"] = new SelectList(_context.Entries, "Id", "Id");
-            return Page();
+            return NotFound();
         }
 
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)

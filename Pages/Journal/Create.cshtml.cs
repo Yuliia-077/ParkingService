@@ -6,9 +6,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using ParkingService.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ParkingService.Pages.Journal
 {
+    [Authorize]
     public class CreateModel : PageModel
     {
         private readonly ParkingService.Models.ParkingServiceContext _context;
@@ -45,15 +47,13 @@ namespace ParkingService.Pages.Journal
 
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid)
-            {
-                return Page();
+            if (ModelState.IsValid)
+            { 
+                _context.Entries.Add(Entry);
+                await _context.SaveChangesAsync();
+                return RedirectToPage("./Index");
             }
-
-            _context.Entries.Add(Entry);
-            await _context.SaveChangesAsync();
-
-            return RedirectToPage("./Index");
+            return Page();
         }
     }
 }

@@ -5,9 +5,12 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using ParkingService.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.EntityFrameworkCore;
 
 namespace ParkingService.Pages.Administration
 {
+    [Authorize]
     public class IndexModel : PageModel
     {
         private readonly ParkingServiceContext _context;
@@ -18,14 +21,14 @@ namespace ParkingService.Pages.Administration
             _context = db;
         }
 
-        public IActionResult OnGet()
+        public async Task<IActionResult> OnGetAsync()
         {
-            if(_context.Prices.Any())
+            if(await _context.Prices.AnyAsync())
             {
-                DateTime date = _context.Prices.Where(p => p.DateTime <= DateTime.Now).Max(p => p.DateTime);
+                DateTime date = await _context.Prices.Where(p => p.DateTime <= DateTime.Now).MaxAsync(p => p.DateTime);
                 if (date != null)
                 {
-                    Price = _context.Prices.FirstOrDefault(p => p.DateTime == date);
+                    Price = await _context.Prices.FirstOrDefaultAsync(p => p.DateTime == date);
                     return Page();
                 }
             }

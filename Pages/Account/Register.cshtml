@@ -1,0 +1,49 @@
+﻿@page
+@model ParkingService.Pages.Account.RegisterModel
+@{
+    ViewData["Title"] = "Add user";
+}
+
+<h1 class="text-center">Add user</h1>
+<hr />
+<div class="container">
+    <div class="row">
+        <div class="col-sm-10 ">
+            <form method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group row">
+                    <label asp-for="Register.Name" class="control-label col-sm-4 text-sm-right">Name:</label>
+                    <input asp-for="Register.Name" class="form-control col-sm-6" />
+                    <span asp-validation-for="Register.Name" class="text-danger"></span>
+                </div>
+                <div class="form-group row">
+                    <label asp-for="Register.Email" class="control-label col-sm-4 text-sm-right">Email:</label>
+                    <input asp-for="Register.Email" class="form-control col-sm-6" type="email" />
+                    <span asp-validation-for="Register.Email" class="text-danger text-center"></span>
+                </div>
+                <div class="form-group row">
+                    <label asp-for="Register.Password" class="control-label col-sm-4 text-sm-right">Password:</label>
+                    <input asp-for="Register.Password" class="form-control col-sm-6" />
+                    <span asp-validation-for="Register.Password" class="text-danger"></span>
+                </div>
+                <div class="form-group row">
+                    <label asp-for="Register.ConfirmPassword" class="control-label col-sm-4 text-sm-right">Confirm password:</label>
+                    <input asp-for="Register.ConfirmPassword" class="form-control col-sm-6" />
+                    <span asp-validation-for="Register.ConfirmPassword" class="text-danger"></span>
+                </div>
+                <div class="form-group row">
+                    <label asp-for="Register.IsAdmin" class="control-label col-sm-4 text-sm-right">is admin?</label>
+                    <input asp-for="Register.IsAdmin" class="form-control col-sm-6" />
+                    <span asp-validation-for="Register.IsAdmin" class="text-danger"></span>
+                </div>
+                <div class="form-group text-center">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -11,45 +11,58 @@
 <body>
     <div class="container-fluid">
         <header>
-            <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-                <a class="navbar-brand" asp-area="" asp-page="/Index">ParkingService</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Index">Administration</a>
-                        </li>
-                     </ul>
+            <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3 row">
+                <div class="col-11">
+                    <a class="navbar-brand" asp-area="" asp-page="/Index">ParkingService</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
                 </div>
-            </nav>
-        </header>
+                <div class="col-1">
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <a class="nav-link text-dark" asp-area="" asp-page="/Account/Login" asp-page-handler="LogOut" onclick="return confirm('Are you sure you want to sign out?');"><i class="fas fa-sign-out-alt"></i></a>
+                    }
+                    @if (!User.Identity.IsAuthenticated)
+                    {
+                        <a class="nav-link text-dark" asp-area="" asp-page="/Account/Login"><i class="fas fa-sign-in-alt"></i></a>
+                    }
+                </div>
+    </nav>
+    </header>
         <div class="row">
-            <div class="col-sm-2">
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Administration/Index">Administration</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Cars/Index">Cars</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Journal/Index">Journal</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Payment/Index">Payment</a>
-                        </li>
-                    </ul>
+            @if (User.Identity.IsAuthenticated)
+            {
+                <div class="col-sm-2">
+                    <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                        <ul class="navbar-nav flex-grow-1">
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-page="/Cars/Index">Cars</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-page="/Journal/Index">Journal</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-page="/Payment/Index">Payment</a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-            </div>
-            <div class="col-sm-10">
-                <main role="main" class="pb-3">
-                    @RenderBody()
-                </main>
-            </div>
+                <div class="col-sm-10">
+                    <main role="main" class="pb-3">
+                        @RenderBody()
+                    </main>
+                </div>
+            }
+            @if (!User.Identity.IsAuthenticated)
+            {
+                <div class="col-sm-12">
+                    <main role="main" class="pb-3">
+                        @RenderBody()
+                    </main>
+                </div>
+            }
         </div>
     </div>
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using ParkingService.Models;
 
 namespace ParkingService.Models
 {
@@ -17,7 +18,7 @@ namespace ParkingService.Models
         public ParkingServiceContext(DbContextOptions<ParkingServiceContext> options) 
             : base(options)
         {
-            Database.EnsureCreated();
+            //Database.EnsureCreated();
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

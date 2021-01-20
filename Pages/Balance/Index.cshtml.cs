@@ -4,10 +4,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 using ParkingService.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ParkingService.Pages.Balance
 {
+    [Authorize]
     public class IndexModel : PageModel
     {
         private readonly ParkingServiceContext _context;
@@ -19,14 +22,14 @@ namespace ParkingService.Pages.Balance
             _context = db;
         }
 
-        public IActionResult OnGet(int? id)
+        public async Task<IActionResult> OnGetAsync(int? id)
         {
             if(id != null)
             {
                 Id = Convert.ToInt32(id);
-                if (_context.Balances.Any(n => n.EntryId == Id))
+                if (await _context.Balances.AnyAsync(n => n.EntryId == Id))
                 {
-                    Balances = _context.Balances.Where(n => n.EntryId == id).ToList();
+                    Balances = await _context.Balances.Where(n => n.EntryId == id).ToListAsync();
                     return Page();
                 }
                 return RedirectToPage("./Create", new { id = Id });

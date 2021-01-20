@@ -35,7 +35,7 @@ namespace ParkingService.Pages.Account
                 User user = await _context.Users.FirstOrDefaultAsync(u => u.Email == Login.Email && u.Password == Login.Password);
                 if(user!=null)
                 {
-                    await Authenticate(user.Email);
+                    await Authenticate(user);
                     return RedirectToPage("/Index");
                 }
                 ModelState.AddModelError("", "Login and(or) password are incorrect!");
@@ -49,12 +49,13 @@ namespace ParkingService.Pages.Account
             return RedirectToPage("Login");
         }
 
-        private async Task Authenticate(string userName)
+        private async Task Authenticate(User user)
         {
             // создаем один claim
             var claims = new List<Claim>
             {
-                new Claim(ClaimsIdentity.DefaultNameClaimType, userName)
+                new Claim(ClaimsIdentity.DefaultNameClaimType, user.Email),
+                new Claim("admin", Convert.ToString(user.IsAdmin))
             };
             // создаем объект ClaimsIdentity
             ClaimsIdentity id = new ClaimsIdentity(claims, "ApplicationCookie", ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType);

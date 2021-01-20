@@ -37,6 +37,12 @@
                 <div class="col-sm-2">
                     <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                         <ul class="navbar-nav flex-grow-1">
+                            @if (User.HasClaim("admin","True"))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-page="/Account/Register"><i class="fas fa-plus"></i> User</a>
+                                </li>
+                            }
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-page="/Cars/Index">Cars</a>
                             </li>

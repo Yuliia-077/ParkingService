@@ -174,7 +174,6 @@ D:\Agiliway\ParkingService\ParkingService\obj\Debug\netcoreapp3.1\Razor\Pages\Ad
 D:\Agiliway\ParkingService\ParkingService\obj\Debug\netcoreapp3.1\Razor\Pages\Cars\Create.cshtml.g.cs
 D:\Agiliway\ParkingService\ParkingService\obj\Debug\netcoreapp3.1\Razor\Pages\Cars\Index.cshtml.g.cs
 D:\Agiliway\ParkingService\ParkingService\obj\Debug\netcoreapp3.1\Razor\Pages\Cars\Edit.cshtml.g.cs
-D:\Agiliway\ParkingService\ParkingService\obj\Debug\netcoreapp3.1\Razor\Pages\Administration\Edit.cshtml.g.cs
 D:\Agiliway\ParkingService\ParkingService\obj\Debug\netcoreapp3.1\Razor\Pages\Journal\Create.cshtml.g.cs
 D:\Agiliway\ParkingService\ParkingService\obj\Debug\netcoreapp3.1\Razor\Pages\Journal\Index.cshtml.g.cs
 D:\Agiliway\ParkingService\ParkingService\obj\Debug\netcoreapp3.1\Razor\Pages\Journal\Edit.cshtml.g.cs

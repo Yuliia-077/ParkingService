@@ -37,9 +37,13 @@ namespace ParkingService.Pages.Balance
         {
             if (ModelState.IsValid)
             {
-                _context.Balances.Add(Balance);
-                await _context.SaveChangesAsync();
-                return RedirectToPage("./Index");
+                if(Balance.Time <= DateTime.Now)
+                {
+                    _context.Balances.Add(Balance);
+                    await _context.SaveChangesAsync();
+                    return RedirectToPage("./Index");
+                }
+                ModelState.AddModelError("", "Date and time can't be greater than today!");
             }
             return Page();
         }

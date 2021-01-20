@@ -33,6 +33,11 @@ namespace ParkingService
                 {
                     options.LoginPath = new Microsoft.AspNetCore.Http.PathString("/Account/Login");
                 });
+            services.AddAuthorization(opts => {
+                opts.AddPolicy("OnlyForAdmin", policy => {
+                    policy.RequireClaim("admin", "True");
+                });
+            });
 
             services.AddRazorPages();
         }

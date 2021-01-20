@@ -38,35 +38,17 @@ namespace ParkingService.Pages.Balance
 
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
-                return Page();
-            }
-
-            _context.Attach(Balance).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!BalanceExists(Balance.Id))
+                if (Balance.Time <= DateTime.Now)
                 {
-                    return NotFound();
+                    _context.Balances.Update(Balance);
+                    await _context.SaveChangesAsync();
+                    return RedirectToPage("./Index");
                 }
-                else
-                {
-                    throw;
-                }
+                ModelState.AddModelError("", "Date and time can't be greater than today!");
             }
-
-            return RedirectToPage("./Index");
-        }
-
-        private bool BalanceExists(int id)
-        {
-            return _context.Balances.Any(e => e.Id == id);
+            return Page();
         }
     }
 }

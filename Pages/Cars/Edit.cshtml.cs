@@ -38,35 +38,20 @@ namespace ParkingService.Pages.Cars
 
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
-                return Page();
-            }
-
-            _context.Attach(Car).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!CarExists(Car.Id))
+                if(Car != null)
                 {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                    if (await _context.Cars.AnyAsync(c => c.Id == Car.Id))
+                    {
+                        _context.Cars.Update(Car);
+                        await _context.SaveChangesAsync();
+                        return RedirectToPage("Index");
+                    }
+
+                } 
             }
-
-            return RedirectToPage("./Index");
-        }
-
-        private bool CarExists(int id)
-        {
-            return _context.Cars.Any(e => e.Id == id);
+            return Page();
         }
     }
 }

@@ -50,8 +50,7 @@ namespace ParkingService.Pages.Journal
                 return NotFound();
             }
 
-            Entry = await _context.Entries
-                .Include(e => e.Car).FirstOrDefaultAsync(m => m.Id == id);
+            Entry = await _context.Entries.FirstOrDefaultAsync(m => m.Id == id);
             Car car = await _context.Cars.FirstOrDefaultAsync(s => s.Id == Entry.CarId);
 
             if (Entry == null)
@@ -65,35 +64,40 @@ namespace ParkingService.Pages.Journal
 
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
-                return Page();
-            }
-
-            _context.Attach(Entry).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!EntryExists(Entry.Id))
+                if (Entry.EntryTime > DateTime.Now)
                 {
-                    return NotFound();
+                    ModelState.AddModelError("", "Entry time can't be greater than today!");
                 }
                 else
                 {
-                    throw;
+                    if (CheckLeavingTime(Entry))
+                    {
+                        _context.Entries.Update(Entry);
+                        await _context.SaveChangesAsync();
+                        return RedirectToPage("./Index");
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("", "Leaving time can't be less than entry time!");
+                    }
                 }
             }
-
-            return RedirectToPage("./Index");
+            Cars = CarsList(await _context.Cars.FirstOrDefaultAsync(x=>x.Id==Entry.CarId));
+            return Page();
         }
-
-        private bool EntryExists(int id)
+        private bool CheckLeavingTime(Entry entry)
         {
-            return _context.Entries.Any(e => e.Id == id);
+            if (entry.LeavingTime != null)
+            {
+                if (entry.LeavingTime > entry.EntryTime)
+                {
+                    return true;
+                }
+                return false;
+            }
+            return true;
         }
     }
 }

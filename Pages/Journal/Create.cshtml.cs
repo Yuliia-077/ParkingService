@@ -48,12 +48,40 @@ namespace ParkingService.Pages.Journal
         public async Task<IActionResult> OnPostAsync()
         {
             if (ModelState.IsValid)
-            { 
-                _context.Entries.Add(Entry);
-                await _context.SaveChangesAsync();
-                return RedirectToPage("./Index");
+            {
+                if(Entry.EntryTime > DateTime.Now)
+                {
+                    ModelState.AddModelError("", "Entry time can't be greater than today!");
+                }
+                else
+                {
+                    if (CheckLeavingTime(Entry))
+                    {
+                        _context.Entries.Add(Entry);
+                        await _context.SaveChangesAsync();
+                        return RedirectToPage("./Index");
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("", "Leaving time can't be less than entry time!");
+                    }
+                }
             }
+            Cars = CarsList();
             return Page();
+        }
+
+        private bool CheckLeavingTime(Entry entry)
+        {
+            if(entry.LeavingTime != null)
+            {
+                if(entry.LeavingTime > entry.EntryTime)
+                {
+                    return true;
+                }
+                return false;
+            }
+            return true;
         }
     }
 }

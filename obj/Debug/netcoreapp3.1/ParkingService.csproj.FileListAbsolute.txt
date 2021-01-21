@@ -9,7 +9,6 @@ D:\Agiliway\ParkingService\ParkingService\bin\Debug\netcoreapp3.1\ParkingService
 D:\Agiliway\ParkingService\ParkingService\bin\Debug\netcoreapp3.1\ParkingService.pdb
 D:\Agiliway\ParkingService\ParkingService\bin\Debug\netcoreapp3.1\ParkingService.Views.dll
 D:\Agiliway\ParkingService\ParkingService\bin\Debug\netcoreapp3.1\ParkingService.Views.pdb
-D:\Agiliway\ParkingService\ParkingService\obj\Debug\netcoreapp3.1\ParkingService.csprojAssemblyReference.cache
 D:\Agiliway\ParkingService\ParkingService\obj\Debug\netcoreapp3.1\ParkingService.AssemblyInfoInputs.cache
 D:\Agiliway\ParkingService\ParkingService\obj\Debug\netcoreapp3.1\ParkingService.AssemblyInfo.cs
 D:\Agiliway\ParkingService\ParkingService\obj\Debug\netcoreapp3.1\ParkingService.RazorAssemblyInfo.cache

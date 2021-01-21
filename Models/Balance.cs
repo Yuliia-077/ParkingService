@@ -18,7 +18,6 @@ namespace ParkingService.Models
         public DateTime Time { get; set; }
 
         [Required]
-        public int EntryId { get; set; }
-        public Entry Entry { get; set; }
+        public Car Car { get; set; }
     }
 }

@@ -27,11 +27,11 @@ namespace ParkingService.Pages.Balance
             if(id != null)
             {
                 Id = Convert.ToInt32(id);
-                if (await _context.Balances.AnyAsync(n => n.EntryId == Id))
+                /*if (await _context.Balances.AnyAsync(n => n.EntryId == Id))
                 {
                     Balances = await _context.Balances.Where(n => n.EntryId == id).ToListAsync();
                     return Page();
-                }
+                }*/
                 return RedirectToPage("./Create", new { id = Id });
             }
             return RedirectToPage("/Payment/Index");

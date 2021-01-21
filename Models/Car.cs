@@ -31,5 +31,6 @@ namespace ParkingService.Models
         public string PhoneNumber { get; set; }
 
         public List<Entry> Entries { get; set; }
+        public List<Balance> Balances { get; set; }
     }
 }

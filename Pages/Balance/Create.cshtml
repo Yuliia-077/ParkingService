@@ -22,7 +22,7 @@
                     <input asp-for="Balance.Time" class="form-control col-sm-6" />
                     <span asp-validation-for="Balance.Time" class="text-danger"></span>
                 </div>
-                <input type="hidden" asp-for="Balance.EntryId" value="@Model.Id" />
+                @*<input type="hidden" asp-for="Balance.EntryId" value="@Model.Id" />*@
                 <div class="form-group text-center">
                     <input type="submit" value="Save" class="btn btn-primary" />
                 </div>

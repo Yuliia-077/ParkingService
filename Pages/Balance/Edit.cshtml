@@ -23,14 +23,14 @@
                     <input asp-for="Balance.Time" class="form-control col-sm-6" />
                     <span asp-validation-for="Balance.Time" class="text-danger"></span>
                 </div>
-                <input type="hidden" asp-for="Balance.EntryId" />
+                @*<input type="hidden" asp-for="Balance.EntryId" />*@
                 <div class="form-group text-center">
                     <input type="submit" value="Save" class="btn btn-primary" />
                 </div>
             </form>
         </div>
         <div class="col-2 text-center">
-            <a asp-page="Index" asp-route-id="@Model.Balance.EntryId">Back to balance</a>
+            @*<a asp-page="Index" asp-route-id="@Model.Balance.EntryId">Back to balance</a>*@
         </div>
     </div>
 </div>

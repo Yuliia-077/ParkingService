@@ -15,7 +15,7 @@ namespace ParkingService.Pages.Payment
     public class IndexModel : PageModel
     {
         private readonly ParkingServiceContext _context;
-        public List<Entry> Entries { get; set; }
+        public List<Car> Cars { get; set; }
 
         public IndexModel(ParkingServiceContext db)
         {
@@ -26,19 +26,17 @@ namespace ParkingService.Pages.Payment
         {
             if(await _context.Entries.AnyAsync())
             {
-                var list = await _context.Entries.OrderByDescending(n => n.Id).ToListAsync();
-                List<Entry> entries = new List<Entry>();
+                // var list = await _context.Entries.OrderByDescending(n => n.Id).ToListAsync();
+                var list = await _context.Cars.Include(x => x.Entries).Include(y => y.Balances).ToListAsync();
+                List<Car> cars = new List<Car>();
                 foreach(var item in list)
                 {
-                    Entry entry = item;
-                    entry.Car = await _context.Cars.FirstOrDefaultAsync(c => c.Id == item.CarId);
-
+                    Car car = item;
                     Counting counting = new Counting(_context);
-                    entry = await counting.Debts(entry);
-
-                    entries.Add(entry);
+                    car = await counting.Debts(car);
+                    cars.Add(car);
                 }
-                Entries = entries;
+                Cars = cars;
                 return Page();
 
             }

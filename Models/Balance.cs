@@ -17,7 +17,8 @@ namespace ParkingService.Models
         [Required(ErrorMessage = "Enter date and time!")]
         public DateTime Time { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Car")]
+        public int CarId { get; set; }
         public Car Car { get; set; }
     }
 }

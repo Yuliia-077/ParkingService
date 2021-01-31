@@ -182,3 +182,4 @@ D:\Agiliway\ParkingService\ParkingService\obj\Debug\netcoreapp3.1\Razor\Pages\Ba
 D:\Agiliway\ParkingService\ParkingService\obj\Debug\netcoreapp3.1\Razor\Pages\Balance\Edit.cshtml.g.cs
 D:\Agiliway\ParkingService\ParkingService\obj\Debug\netcoreapp3.1\Razor\Pages\Account\Register.cshtml.g.cs
 D:\Agiliway\ParkingService\ParkingService\obj\Debug\netcoreapp3.1\Razor\Pages\Account\Login.cshtml.g.cs
+D:\Agiliway\ParkingService\ParkingService\obj\Debug\netcoreapp3.1\ParkingService.csprojAssemblyReference.cache

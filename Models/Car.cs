@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ParkingService.Models
 {
@@ -32,5 +33,8 @@ namespace ParkingService.Models
 
         public List<Entry> Entries { get; set; }
         public List<Balance> Balances { get; set; }
+
+        [NotMapped]
+        public decimal Payment { get; set; }
     }
 }

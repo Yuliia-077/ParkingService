@@ -32,7 +32,7 @@ namespace ParkingService.Pages.Administration
                     return Page();
                 }
             }
-            return RedirectToPage("./Create");
+            return RedirectToPage("/Administration/Create");
         }
     }
 }

@@ -44,7 +44,7 @@ namespace ParkingService.Pages.Balance
                 {
                     _context.Balances.Update(Balance);
                     await _context.SaveChangesAsync();
-                    return RedirectToPage("./Index");
+                    return RedirectToPage("./Index", new { id = Balance.CarId });
                 }
                 ModelState.AddModelError("", "Date and time can't be greater than today!");
             }

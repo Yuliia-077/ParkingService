@@ -11,7 +11,6 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace ParkingService.Pages.Account
 {
-    [Authorize(Policy ="OnlyForAdmin")]
     public class RegisterModel : PageModel
     {
         private readonly ParkingServiceContext _context;
@@ -34,7 +33,7 @@ namespace ParkingService.Pages.Account
                 User user = await _context.Users.FirstOrDefaultAsync(u => u.Email == Register.Email);
                 if (user == null)
                 {
-                    _context.Users.Add(new User { Name = Register.Name, Email = Register.Email, Password = Register.Password, IsAdmin = Register.IsAdmin });
+                    _context.Users.Add(new User { Name = Register.Name, Email = Register.Email, Password = Register.Password});
                     await _context.SaveChangesAsync();
                     return RedirectToPage("/Index");
                 }

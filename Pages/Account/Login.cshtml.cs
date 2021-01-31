@@ -54,8 +54,7 @@ namespace ParkingService.Pages.Account
             // создаем один claim
             var claims = new List<Claim>
             {
-                new Claim(ClaimsIdentity.DefaultNameClaimType, user.Email),
-                new Claim("admin", Convert.ToString(user.IsAdmin))
+                new Claim(ClaimsIdentity.DefaultNameClaimType, user.Email)
             };
             // создаем объект ClaimsIdentity
             ClaimsIdentity id = new ClaimsIdentity(claims, "ApplicationCookie", ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType);

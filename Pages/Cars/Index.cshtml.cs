@@ -38,28 +38,19 @@ namespace ParkingService.Pages.Cars
 
         public async Task<IActionResult> OnGetDelete(int id)
         {
-            Car car = await _context.Cars.FirstOrDefaultAsync(p => p.Id == id);
+            Car car = await _context.Cars.Include(x => x.Entries).Include(y => y.Balances).FirstOrDefaultAsync(p => p.Id == id);
             if (car != null)
             {
-                List<Entry> entries = await _context.Entries.Where(k=>k.CarId == car.Id).ToListAsync();
-                decimal sumDebts = 0;
-                foreach(Entry en in entries)
+                Counting counting = new Counting(_context);
+                car = await counting.Debts(car);
+                if(car.Payment < 0)
                 {
-                    Counting counting = new Counting(_context);
-                    Entry entry = await counting.Debts(en);
-                    if(entry.IsPaid == false)
-                    {
-                        sumDebts += entry.Payment;
-                    }
-                }
-                if(sumDebts == 0)
-                {
-                    _context.Cars.Remove(car);
-                    _context.SaveChanges();
+                    Message = "Debt in the amount of " + Convert.ToString(car.Payment);
                 }
                 else
                 {
-                    Message = "Debt in the amount of " + Convert.ToString(sumDebts);
+                    _context.Cars.Remove(car);
+                    _context.SaveChanges();
                 }
             }
             Cars = await _context.Cars.OrderByDescending(p => p.Id).ToListAsync();

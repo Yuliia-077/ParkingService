@@ -23,25 +23,25 @@
             </div>
             <hr />
             <div class="row">
-                @foreach (var entry in Model.Entries)
+                @foreach (var car in Model.Cars)
                 {
                     <div class="col-4">
-                        <p>@entry.Car.PlateNumber</p>
+                        <p>@car.PlateNumber</p>
                     </div>
-                    @if (entry.IsPaid == false)
+                    @if (car.Payment < 0)
                     {
                         <div class="col-4  payment">
-                            <p style="color:red;">@entry.Payment</p>
+                            <p style="color:red;">@car.Payment</p>
                         </div>
                     }
-                    @if (entry.IsPaid == true)
+                    @if (car.Payment >= 0)
                     {
                         <div class="col-4 ">
-                            <p style="color:green;">@entry.Payment</p>
+                            <p style="color:green;">@car.Payment</p>
                         </div>
                     }
                     <div class="col-4">
-                        <a asp-page="/Balance/Index" asp-route-id="@entry.Id"><i class="fas fa-wallet"></i></a>
+                        <a asp-page="/Balance/Index" asp-route-id="@car.Id"><i class="fas fa-wallet"></i></a>
                     </div>
                 }
             </div>

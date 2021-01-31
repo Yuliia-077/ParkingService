@@ -18,12 +18,6 @@ namespace ParkingService.Models
         [Required(ErrorMessage = "Choose car!")]
         public int CarId { get; set; }
         public Car Car { get; set; }
-        public List<Balance> Balances { get; set; }
-
-        [NotMapped]
-        public decimal Payment { get; set; }
-        [NotMapped]
-        public bool IsPaid { get; set; }
 
     }
 }
